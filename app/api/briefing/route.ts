@@ -19,11 +19,12 @@ export async function POST(request: NextRequest) {
     const response = await create({
       model: "claude-sonnet-4-6",
       max_tokens: 2000,
+      system: "You are a news briefing API. You must respond with only a valid JSON object — no preamble, no explanation, no markdown, no code fences. The very first character of your response must be { and the last must be }.",
       tools: [{ type: "web_search_20250305", name: "web_search" }],
       messages: [
         {
           role: "user",
-          content: `You are a senior news editor writing a concise briefing on: "${topic}".
+          content: `Write a news briefing on: "${topic}".
 
 Return ONLY a JSON object with no markdown, no code fences, no preamble. Exactly this shape:
 {
@@ -63,10 +64,20 @@ Rules:
     }
 
     const raw = (textBlock as { type: string; text: string }).text;
-    const start = raw.indexOf("{");
     const end = raw.lastIndexOf("}");
-    if (start === -1 || end === -1) throw new Error("No JSON object found in response");
-    const data = JSON.parse(raw.slice(start, end + 1));
+    let data = null;
+    let searchFrom = 0;
+    while (searchFrom < raw.length) {
+      const start = raw.indexOf("{", searchFrom);
+      if (start === -1 || start >= end) break;
+      try {
+        data = JSON.parse(raw.slice(start, end + 1));
+        break;
+      } catch {
+        searchFrom = start + 1;
+      }
+    }
+    if (!data) throw new Error("No valid JSON found in response");
 
     return NextResponse.json(data);
   } catch (error) {
