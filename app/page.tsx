@@ -164,7 +164,7 @@ export default function Home() {
               </ul>
               {briefing.disagreements && briefing.disagreements.length > 0 && (
                 <div style={{ background: "#eff6ff", borderRadius: "10px", padding: "14px 18px", marginTop: "16px", borderLeft: "3px solid #2563eb" }}>
-                  <p style={{ fontSize: "11px", fontWeight: "700", letterSpacing: "0.1em", textTransform: "uppercase", color: "#aaa", margin: "0 0 8px 0" }}>Where people disagree</p>
+                  <p style={{ fontSize: "11px", fontWeight: "700", letterSpacing: "0.1em", textTransform: "uppercase", color: "#aaa", margin: "0 0 8px 0" }}>Points of Contention</p>
                   <ul style={{ margin: 0, paddingLeft: "18px" }}>
                     {briefing.disagreements.map((item, i) => (
                       <li key={i} style={{ fontSize: "14px", lineHeight: "1.7", marginBottom: "6px", color: "#444" }}>
