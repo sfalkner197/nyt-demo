@@ -20,7 +20,7 @@ function BulletText({ text }: { text: string }) {
   );
 }
 
-const LOADING_MESSAGES = ["Searching the web...", "Reading sources...", "Writing your briefing..."];
+const LOADING_MESSAGES = ["Finding the latest news...", "Creating your briefing..."];
 
 function LoadingIndicator() {
   const [idx, setIdx] = useState(0);
