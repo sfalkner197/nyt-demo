@@ -62,8 +62,11 @@ Rules:
       throw new Error("No text response from model");
     }
 
-    const clean = (textBlock as { type: string; text: string }).text.replace(/```json|```/g, "").trim();
-    const data = JSON.parse(clean);
+    const raw = (textBlock as { type: string; text: string }).text;
+    const start = raw.indexOf("{");
+    const end = raw.lastIndexOf("}");
+    if (start === -1 || end === -1) throw new Error("No JSON object found in response");
+    const data = JSON.parse(raw.slice(start, end + 1));
 
     return NextResponse.json(data);
   } catch (error) {
