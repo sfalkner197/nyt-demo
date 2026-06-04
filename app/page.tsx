@@ -180,7 +180,7 @@ export default function Home() {
             <section style={{ marginBottom: "28px" }}>
               <p style={{ fontSize: "11px", fontWeight: "700", letterSpacing: "0.1em", textTransform: "uppercase", color: "#2563eb", margin: "0 0 12px 0" }}>What's new</p>
               <ul style={{ margin: 0, paddingLeft: "18px" }}>
-                {briefing.whatsNew.map((item, i) => (
+                {(briefing.whatsNew || []).map((item, i) => (
                   <li key={i} style={{ fontSize: "15px", lineHeight: "1.7", marginBottom: "8px", color: "#222" }}>
                     <BulletText text={item.text} />
                     {item.sourceUrl && (
@@ -198,7 +198,7 @@ export default function Home() {
             <section style={{ marginBottom: "28px" }}>
               <p style={{ fontSize: "11px", fontWeight: "700", letterSpacing: "0.1em", textTransform: "uppercase", color: "#2563eb", margin: "0 0 12px 0" }}>What's next</p>
               <ul style={{ margin: 0, paddingLeft: "18px" }}>
-                {briefing.whatsNext.map((item, i) => (
+                {(briefing.whatsNext || []).map((item, i) => (
                   <li key={i} style={{ fontSize: "15px", lineHeight: "1.7", marginBottom: "8px", color: "#222" }}>
                     <BulletText text={item} />
                   </li>
@@ -211,7 +211,7 @@ export default function Home() {
               <section style={{ borderTop: "1px solid #f0f0f0", paddingTop: "20px" }}>
                 <p style={{ fontSize: "11px", fontWeight: "700", letterSpacing: "0.1em", textTransform: "uppercase", color: "#aaa", margin: "0 0 10px 0" }}>Sources</p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: "6px" }}>
-                  {briefing.sources.map((source, i) => (
+                  {(briefing.sources || []).map((source, i) => (
                     <a key={i} href={source.url} target="_blank" rel="noopener noreferrer"
                       style={{ fontSize: "13px", color: "#444", textDecoration: "none", background: "#eff6ff", borderRadius: "8px", padding: "4px 12px", color: "#2563eb" }}>
                       {source.outlet}
