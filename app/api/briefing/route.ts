@@ -53,7 +53,8 @@ Rules:
 - whatsNew: ONLY developments from the last 24 hours. If nothing significant happened in the last 24 hours, return 1 item saying so. Every item must have a real source URL.
 - whatsNext: 2-3 bullet points on what to watch for.
 - Every bullet point must start with "**Bold key phrase**: " format.
-- Use web search to find real, current information. Do not invent details.`,
+- Use web search to find real, current information. Do not invent details.
+- Even for vague or broad topics, always return the JSON structure. Interpret the topic as best you can.`,
         },
       ],
     });
@@ -77,7 +78,7 @@ Rules:
         searchFrom = start + 1;
       }
     }
-    if (!data) throw new Error("No valid JSON found in response");
+    if (!data) throw new Error("Try a more specific topic — the model couldn't generate a structured briefing for that query.");
 
     return NextResponse.json(data);
   } catch (error) {
