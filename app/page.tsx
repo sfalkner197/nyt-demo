@@ -98,7 +98,7 @@ export default function Home() {
               type="text"
               value={topic}
               onChange={(e) => setTopic(e.target.value)}
-              placeholder="California governor's race"
+              placeholder="California elections"
               style={{
                 flex: 1,
                 fontSize: "18px",
