@@ -20,12 +20,16 @@ function BulletText({ text }: { text: string }) {
   );
 }
 
-const LOADING_MESSAGES = ["Finding the latest news...", "Creating your briefing..."];
+const LOADING_MESSAGES = [
+  "Searching recent sources...",
+  "Analysing context...",
+  "Building your briefing...",
+];
 
 function LoadingIndicator() {
   const [idx, setIdx] = useState(0);
   useEffect(() => {
-    const interval = setInterval(() => setIdx(i => (i + 1) % LOADING_MESSAGES.length), 1800);
+    const interval = setInterval(() => setIdx(i => (i + 1) % LOADING_MESSAGES.length), 3500);
     return () => clearInterval(interval);
   }, []);
   return (
