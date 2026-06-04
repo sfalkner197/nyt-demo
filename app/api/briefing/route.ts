@@ -54,7 +54,7 @@ Rules:
 - whatsNext: 2-3 bullet points on what to watch for.
 - Every bullet point must start with "**Bold key phrase**: " format.
 - Use web search to find real, current information. Do not invent details.
-- Even for vague or broad topics, always return the JSON structure. Interpret the topic as best you can.`,
+- If the query is not a real news topic (e.g. gibberish, a question, a test phrase), return exactly: {"error": "not_a_news_topic"}`,
         },
       ],
     });
@@ -78,7 +78,10 @@ Rules:
         searchFrom = start + 1;
       }
     }
-    if (!data) throw new Error("Try a more specific topic — the model couldn't generate a structured briefing for that query.");
+    if (!data) throw new Error("Please enter a real news topic.");
+    if (data.error === "not_a_news_topic") {
+      return NextResponse.json({ error: "Please enter a real news topic." }, { status: 400 });
+    }
 
     return NextResponse.json(data);
   } catch (error) {
